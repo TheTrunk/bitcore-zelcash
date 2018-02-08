@@ -93,9 +93,6 @@ endif
 
 if BUILD_BITCOIN_UTILS
   bin_PROGRAMS += zelcash-cli zelcash-tx
-  if ENABLE_WALLET
-    bin_PROGRAMS += wallet-utility
-  endif
 endif
 
 LIBZELCASH_H = \
@@ -467,14 +464,6 @@ zelcash_cli_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAGS)
 zelcash_cli_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
 zelcash_cli_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
 
-# wallet-utility binary #
-if ENABLE_WALLET
-wallet_utility_SOURCES = wallet-utility.cpp
-wallet_utility_CPPFLAGS = $(AM_CPPFLAGS) $(BITCOIN_INCLUDES) $(EVENT_CFLAG)
-wallet_utility_CXXFLAGS = $(AM_CXXFLAGS) $(PIE_FLAGS)
-wallet_utility_LDFLAGS = $(RELDFLAGS) $(AM_LDFLAGS) $(LIBTOOL_APP_LDFLAGS)
-endif
-
 if TARGET_WINDOWS
 zelcash_cli_SOURCES += bitcoin-cli-res.rc
 endif
@@ -491,21 +480,6 @@ zelcash_cli_LDADD = \
   $(LIBSNARK) \
   $(LIBBITCOIN_CRYPTO) \
   $(LIBZELCASH_LIBS)
-  
-if ENABLE_WALLET
-wallet_utility_LDADD = \
-  libbitcoin_wallet.a \
-  $(LIBBITCOIN_COMMON) \
-  $(LIBBITCOIN_CRYPTO) \
-  $(LIBSECP256K1) \
-  $(LIBBITCOIN_UTIL) \
-  $(BOOST_LIBS) \
-  $(BDB_LIBS) \
-  $(CRYPTO_LIBS) \
-  $(LIBZCASH) \
-  $(LIBZCASH_LIBS)
-endif
-
 #
 
 # zelcash-tx binary #

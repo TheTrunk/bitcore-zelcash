@@ -39,7 +39,7 @@ testScripts=(
     'key_import_export.py'
     'nodehandling.py'
     'reindex.py'
-    'addressindex.py'
+	'addressindex.py'
     'timestampindex.py'
     'spentindex.py'
     'decodescript.py'
